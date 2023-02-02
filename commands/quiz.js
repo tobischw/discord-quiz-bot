@@ -32,6 +32,7 @@ module.exports = {
         const question = randomQuestion.question;
         const options = randomQuestion.options;
         const answer = randomQuestion.answer;
+        const explaination = `Because it is what it is`;
         const answerLetter = String.fromCharCode(65 + answer);
 
         let message = `${question}\n\n`;
@@ -49,12 +50,7 @@ module.exports = {
             )
         });
 
-        answerButtons.addComponents(
-            new ButtonBuilder()
-                .setCustomId(`answer-reveal`)
-                .setLabel(`👀`)
-                .setStyle(ButtonStyle.Danger)
-        );
+
 
         const collector = interaction.channel.createMessageComponentCollector({ time: 300000 });
 
@@ -62,11 +58,18 @@ module.exports = {
             const answerOption = options[answer];
 
             if (interaction.customId == `answer-reveal`) {
-                await interaction.reply({ content: `The answer is ${answerLetter}: ${answerOption}`, ephemeral: true });
+                await interaction.reply({ content: `The answer is ${answerLetter}: ${answerOption} \n ***Explaination*** \n${explaination}`, ephemeral: true });
             } else if (interaction.customId == `answer-${answer}`) {
                 await interaction.reply(`✅ <@${interaction.user.id}> is **CORRECT**!`);
             } else {
-                await interaction.reply(`❌ <@${interaction.user.id}> is **INCORRECT**!`);
+                let cheatButton = new ActionRowBuilder();
+                cheatButton.addComponents(
+                    new ButtonBuilder()
+                        .setCustomId(`answer-reveal`)
+                        .setLabel(`👀`)
+                        .setStyle(ButtonStyle.Danger)
+                );
+                await interaction.reply({content: `❌ <@${interaction.user.id}> is **INCORRECT**!`, components: [cheatButton]});
             }
         });
 
