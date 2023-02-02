@@ -23,7 +23,7 @@ const readFile = util.promisify(fs.readFile);
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('quiz')
-		.setDescription('Displays a random quiz question.'),
+		.setDescription('Displays a random quiz question for a minute.'),
 	async execute(interaction) {
         const data = await readFile("questions.json");
         const questions = JSON.parse(data);
@@ -56,36 +56,33 @@ module.exports = {
                 .setStyle(ButtonStyle.Danger)
         );
 
+        const collector = interaction.channel.createMessageComponentCollector({ time: 60000 });
 
-        const collector = interaction.channel.createMessageComponentCollector({ maxProcessed: 69, time: 1800000 });
-
-        collector.on('collect', async action => {
+        collector.on('collect', async interaction => {
             const answerOption = options[answer];
 
-            if (action.customId == `answer-reveal`) {
-                try {
-                    await action.reply({ content: `The answer is ${answerLetter}: ${answerOption}`, ephemeral: true });
-                } catch (DiscordAPIError) {
-                    await action.editReply({ content: `You tried to answer an old question!`, ephemeral: true });
-                    logger.error(`DiscordAPIError[40060]: Interaction${action.id} has already been acknowledged.`);
-                }
-            } else if (action.customId == `answer-${answer}`) {
-                try {
-                    await action.reply(`✅ <@${action.user.id}> is **CORRECT**!`);
-                } catch (DiscordAPIError) {
-                    await action.editReply({ content: `You tried to answer an old question!`, ephemeral: true });
-                    logger.error(`DiscordAPIError[40060]: Interaction${action.id} has already been acknowledged.`);
-                }
+            if (interaction.customId == `answer-reveal`) {
+                await interaction.reply({ content: `The answer is ${answerLetter}: ${answerOption}`, ephemeral: true });
+            } else if (interaction.customId == `answer-${answer}`) {
+                await interaction.reply(`✅ <@${interaction.user.id}> is **CORRECT**!`);
             } else {
-                try {
-                    await action.reply(`❌ <@${interaction.user.id}> is **INCORRECT**!`);
-                } catch (DiscordAPIError) {
-                    await action.editReply({ content: `You tried to answer an old question!`, ephemeral: true });
-                    logger.error(`DiscordAPIError[40060]: Interaction${action.id} has already been acknowledged.`);
-                }
+                await interaction.reply(`❌ <@${interaction.user.id}> is **INCORRECT**!`);
             }
         });
+
         await interaction.reply({ content: message, components: [answerButtons] });
 
+        collector.on('end', collected => {
+            let answerButtons = new ActionRowBuilder();
+            answerButtons.addComponents(
+                new ButtonBuilder()
+                    .setCustomId(`answer-done`)
+                    .setLabel(`🤌`)
+                    .setStyle(ButtonStyle.Success)
+            );
+
+            interaction.editReply({ content: `This question has expired! ${collected.size} Total Interactions`, components: [answerButtons] });
+            logger.info(`Collected ${collected.size} interactions.`);
+        });
 	},
 };
