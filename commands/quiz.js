@@ -21,7 +21,7 @@ const readFile = util.promisify(fs.readFile);
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('ccna')
+		.setName('quiz')
 		.setDescription('Displays a random quiz question.'),
 	async execute(interaction) {
         const data = await readFile("questions.json");
@@ -58,7 +58,7 @@ module.exports = {
 
         const collector = interaction.channel.createMessageComponentCollector({ maxProcessed: 69, time: 1800000 });
 
-        collector.on('collect', async interaction => {
+        collector.on('collect', async action => {
             if (action.customId == `answer-reveal`) {
                 try {
                     await action.reply({ content: `The answer is ${answerLetter}: ${answerOption}`, ephemeral: true });
