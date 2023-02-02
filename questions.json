@@ -1,0 +1,52 @@
+[
+    {
+      "question": "What is the default subnet mask for a Class C IP address?",
+      "options": ["255.255.255.0", "255.0.0.0", "255.255.0.0"],
+      "answer": 0
+    },
+    {
+      "question": "What is the range of valid IP addresses for a Class C network?",
+      "options": ["192.0.0.0 to 223.255.255.255", "128.0.0.0 to 191.255.255.255", "224.0.0.0 to 239.255.255.255"],
+      "answer": 1
+    },
+    {
+      "question": "What is the broadcast address for a host with IP address 192.168.1.25 and subnet mask 255.255.255.0?",
+      "options": ["192.168.1.255", "192.168.0.255", "192.168.1.0"],
+      "answer": 0
+    },
+    {
+      "question": "What is the purpose of the default gateway in a TCP/IP network?",
+      "options": ["To provide access to the Internet", "To connect to a VPN", "To route traffic between subnets"],
+      "answer": 0
+    },
+    {
+      "question": "What is the purpose of the ping command in a TCP/IP network?",
+      "options": ["To determine the path taken by packets", "To verify the IP address of a host", "To test connectivity between two devices"],
+      "answer": 2
+    },
+    {
+      "question": "What is the purpose of Address Resolution Protocol (ARP)?",
+      "options": ["To map an IP address to a physical address", "To map a physical address to an IP address", "To map a domain name to an IP address"],
+      "answer": 0
+    },
+    {
+      "question": "What is the purpose of Internet Control Message Protocol (ICMP)?",
+      "options": ["To provide error reporting for IP", "To provide flow control for TCP", "To provide reliable delivery for UDP"],
+      "answer": 0
+    },
+    {
+      "question": "What is the purpose of the Network Address Translation (NAT)?",
+      "options": ["To translate private addresses to public addresses", "To translate public addresses to private addresses", "To translate IP addresses to domain names"],
+      "answer": 0
+    },
+    {
+      "question": "What is the purpose of the Border Gateway Protocol (BGP)?",
+      "options": ["To provide routing information between networks", "To provide access control between networks", "To provide encryption between networks"],
+      "answer": 0
+    },
+    {
+      "question": "What is the purpose of Simple Network Management Protocol (SNMP)?",
+      "options": ["To manage network devices", "To provide secure communications between devices", "To provide error reporting for IP"],
+      "answer": 0
+    }
+]
