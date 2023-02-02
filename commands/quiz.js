@@ -56,7 +56,7 @@ module.exports = {
                 .setStyle(ButtonStyle.Danger)
         );
 
-        const collector = interaction.channel.createMessageComponentCollector({ time: 60000 });
+        const collector = interaction.channel.createMessageComponentCollector({ time: 300000 });
 
         collector.on('collect', async interaction => {
             const answerOption = options[answer];
