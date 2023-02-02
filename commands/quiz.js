@@ -59,6 +59,8 @@ module.exports = {
         const collector = interaction.channel.createMessageComponentCollector({ maxProcessed: 69, time: 1800000 });
 
         collector.on('collect', async action => {
+            const answerOption = options[answer];
+
             if (action.customId == `answer-reveal`) {
                 try {
                     await action.reply({ content: `The answer is ${answerLetter}: ${answerOption}`, ephemeral: true });
