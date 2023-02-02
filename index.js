@@ -31,7 +31,7 @@ for (const file of commandFiles) {
 }
 
 client.once(Events.ClientReady, () => {
-	console.log('Running...');
+	console.log('Bot ready...');
 	logger.info('Started!');
 });
 
