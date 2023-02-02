@@ -38,8 +38,20 @@ client.once(Events.ClientReady, () => {
 	logger.info('Started!');
 });
 
-client.on(Events.InteractionCreate, interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isButton()) return;
+
+	if (interaction.customId == `answer-done`) {
+		logger.info(`🤌`);
+		const command = client.commands.get(`quiz`);
+		try {
+			await command.execute(interaction);
+		} catch (error) {
+			logger.error(error);
+			await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+		}
+	}
+	
 	logger.info(interaction);
 });
 
