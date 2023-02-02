@@ -10,9 +10,9 @@
 
 ```json
 {
-	"clientId": "CLIENT_ID",
-	"guildId": "GUILD_ID",
-	"token": "TOKEN"
+    "clientId": "CLIENT_ID",
+    "guildId": "GUILD_ID",
+    "token": "TOKEN"
 }
 ```
 
