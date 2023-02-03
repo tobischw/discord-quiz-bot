@@ -50,15 +50,11 @@ module.exports = {
             )
         });
 
-        answerButtons.addComponents(
-            new ButtonBuilder()
-                .setCustomId(`answer-collect`)
-                .setLabel(`⏱️`)
-                .setStyle(ButtonStyle.Primary)
-        );
-        
+        const filter = i => {
+            return i.user.id === interaction.user.id;
+        };
 
-        const collector = interaction.channel.createMessageComponentCollector();
+        const collector = interaction.channel.createMessageComponentCollector({filter});
 
         collector.on('collect', async interaction => {
             const answerOption = options[answer];
@@ -66,20 +62,16 @@ module.exports = {
             if (interaction.customId == `answer-reveal`) {
                 await interaction.deferReply({ephemeral: true});
                 await interaction.editReply({ content: `The answer is ${answerLetter}: ${answerOption} \n ***Explaination*** \n${explanation}`, ephemeral: true });
-            } else if (interaction.customId == `answer-collect`) {
-                    let nextButton = new ActionRowBuilder();
-                    nextButton.addComponents(
-                        new ButtonBuilder()
-                            .setCustomId(`answer-done`)
-                            .setLabel(`🤌`)
-                            .setStyle(ButtonStyle.Success)
-                    );
-                    await interaction.deferReply({ephemeral: true});
-                    await interaction.editReply({ content: `${message} \nPress 🤌 a few times to crash me for a new question. 😜`, components: [nextButton], ephemeral: true});
-                    logger.info(`InteractionAlreadyReplied Triggerpoint`); //todo Figure out to to handle interactions independently maybe using deferReply and editReply  
             } else if (interaction.customId == `answer-${answer}`) {
+                let nextButton = new ActionRowBuilder();
+                nextButton.addComponents(
+                    new ButtonBuilder()
+                        .setCustomId(`answer-done`)
+                        .setLabel(`🤌`)
+                        .setStyle(ButtonStyle.Success)
+                );
                 await interaction.deferReply({ephemeral: true});
-                await interaction.editReply({content: `✅ That is **CORRECT**!`, ephemeral: true});
+                await interaction.editReply({content: `✅ That is **CORRECT**!\n\nPress 🤌 a few times to crash me for a new question. 😜`, components: [nextButton], ephemeral: true});
             } else {
                 let cheatButton = new ActionRowBuilder();
                 cheatButton.addComponents(
