@@ -4,16 +4,16 @@ const fs = require('node:fs');
 const { createLogger, format, transports } = require('winston');
 
 const logger = createLogger({
-    level: 'info',
+    level: `info`,
     format: format.json(),
-    defaultMeta: { service: 'command' },
+    defaultMeta: { service: `command` },
     transports: [
       //
       // - Write to all logs with level `info` and below to `console.log` 
       // - Write all logs error (and below) to `error.log`.
       //
-      new transports.File({ filename: 'error.log', level: 'error' }),
-      new transports.File({ filename: 'console.log' }),
+      new transports.File({ filename: `error.log`, level: `error` }),
+      new transports.File({ filename: `console.log` }),
 	  new transports.Console()
     ]
   });
