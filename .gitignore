@@ -1,5 +1,7 @@
 # discord-quiz-bot specific
 config.json
+console.log
+error.log
 
 # Logs
 logs
