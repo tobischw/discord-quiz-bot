@@ -4,26 +4,26 @@ const util = require("util");
 const { createLogger, format, transports } = require('winston');
 
 const logger = createLogger({
-    level: 'info',
+    level: `info`,
     format: format.json(),
-    defaultMeta: { service: 'game' },
+    defaultMeta: { service: `game` },
     transports: [
       //
       // - Write to all logs with level `info` and below to `console.log` 
       // - Write all logs error (and below) to `error.log`.
       //
-      new transports.File({ filename: 'error.log', level: 'error' }),
-      new transports.File({ filename: 'console.log' }),
+      new transports.File({ filename: `error.log`, level: `error` }),
+      new transports.File({ filename: `console.log` }),
       new transports.Console()
     ]
   });
 
 const leaderboard = createLogger({
-    level: 'info',
+    level: `info`,
     format: format.json(),
-    defaultMeta: { service: 'leaderboard' },
+    defaultMeta: { service: `leaderboard` },
     transports: [
-      new transports.File({ filename: 'leaderboard.log' }),
+      new transports.File({ filename: `leaderboard.log` }),
       new transports.Console()
     ]
 });
@@ -32,8 +32,8 @@ const readFile = util.promisify(fs.readFile);
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('game')
-		.setDescription('Lets play a game for a minute.'),
+		.setName(`game`)
+		.setDescription(`Let's play a game!`),
 	async execute(interaction) {
         const data = await readFile("questions.json");
         const questions = JSON.parse(data);
@@ -60,7 +60,7 @@ module.exports = {
             )
         });
 
-        const collector = interaction.channel.createMessageComponentCollector({ time: 60000 });
+        const collector = interaction.channel.createMessageComponentCollector({ time: 42000 });
 
         collector.on('collect', async interaction => {
             const answerOption = options[answer];
