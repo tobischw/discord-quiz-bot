@@ -6,7 +6,7 @@ const { createLogger, format, transports } = require('winston');
 const logger = createLogger({
     level: 'info',
     format: format.json(),
-    defaultMeta: { service: 'quiz' },
+    defaultMeta: { service: 'game' },
     transports: [
       //
       // - Write to all logs with level `info` and below to `console.log` 
@@ -18,12 +18,22 @@ const logger = createLogger({
     ]
   });
 
+const leaderboard = createLogger({
+    level: 'info',
+    format: format.json(),
+    defaultMeta: { service: 'leaderboard' },
+    transports: [
+      new transports.File({ filename: 'leaderboard.log' }),
+      new transports.Console()
+    ]
+});
+
 const readFile = util.promisify(fs.readFile);
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('quiz')
-		.setDescription('A random quiz question. ***WARNING***  GHOST MODE Enabled!'),
+		.setName('game')
+		.setDescription('Lets play a game for a minute.'),
 	async execute(interaction) {
         const data = await readFile("questions.json");
         const questions = JSON.parse(data);
@@ -50,34 +60,16 @@ module.exports = {
             )
         });
 
-        answerButtons.addComponents(
-            new ButtonBuilder()
-                .setCustomId(`answer-collect`)
-                .setLabel(`⏱️`)
-                .setStyle(ButtonStyle.Primary)
-        );
-        
-
-        const collector = interaction.channel.createMessageComponentCollector();
+        const collector = interaction.channel.createMessageComponentCollector({ time: 60000 });
 
         collector.on('collect', async interaction => {
             const answerOption = options[answer];
 
             if (interaction.customId == `answer-reveal`) {
                 await interaction.reply({ content: `The answer is ${answerLetter}: ${answerOption} \n ***Explaination*** \n${explanation}`, ephemeral: true });
-            } else if (interaction.customId == `answer-collect`) {
-                    let nextButton = new ActionRowBuilder();
-                    nextButton.addComponents(
-                        new ButtonBuilder()
-                            .setCustomId(`answer-done`)
-                            .setLabel(`🤌`)
-                            .setStyle(ButtonStyle.Success)
-                    );
-                    await interaction.reply({ content: `${message} \nPress🤌 three times to crash me for a new question. 😜`, components: [nextButton], ephemeral: true});
-                    logger.info(`InteractionAlreadyReplied Triggerpoint`); //todo Figure out to to handle interactions independently  
             } else if (interaction.customId == `answer-${answer}`) {
-                leaderboard.info(`${interaction.id}, ${interaction.user.id}, ${question}, ${answer}, 1`);
-                await interaction.reply({content: `✅ That is **CORRECT**!`, ephemeral: true});
+                leaderboard.info(`ID:${interaction.id}, USER:${interaction.user.id}, QUESTION:${question}, ANSWER:${answer}, SCORE:1`);
+                await interaction.reply(`✅ <@${interaction.user.id}> is **CORRECT**!`);
             } else {
                 let cheatButton = new ActionRowBuilder();
                 cheatButton.addComponents(
@@ -86,11 +78,24 @@ module.exports = {
                         .setLabel(`👀`)
                         .setStyle(ButtonStyle.Danger)
                 );
-                await interaction.reply({content: `❌ That is **INCORRECT**!`, components: [cheatButton], ephemeral: true});
+                leaderboard.info(`ID:${interaction.id}, USER:${interaction.user.id}, QUESTION:${question}, ANSWER:${answer}, SCORE:-1`);
+                await interaction.reply({content: `❌ <@${interaction.user.id}> is **INCORRECT**!`, components: [cheatButton]});
             }
         });
 
-        await interaction.reply({ content: message, components: [answerButtons], ephemeral: true });
+        await interaction.reply({ content: message, components: [answerButtons] });
 
+        collector.on('end', collected => {
+            let answerButtons = new ActionRowBuilder();
+            answerButtons.addComponents(
+                new ButtonBuilder()
+                    .setCustomId(`answer-done`)
+                    .setLabel(`🤌`)
+                    .setStyle(ButtonStyle.Success)
+            );
+
+            interaction.editReply({ content: `This round has ended! ${collected.size} Total Leaderboard Entries Added`, components: [answerButtons] });
+            logger.info(`Collected ${collected.size} interactions.`);
+        });
 	},
 };
