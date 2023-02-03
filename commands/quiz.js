@@ -64,7 +64,7 @@ module.exports = {
             const answerOption = options[answer];
 
             if (interaction.customId == `answer-reveal`) {
-                await interaction.deferReply();
+                await interaction.deferReply({ephemeral: true});
                 await interaction.editReply({ content: `The answer is ${answerLetter}: ${answerOption} \n ***Explaination*** \n${explanation}`, ephemeral: true });
             } else if (interaction.customId == `answer-collect`) {
                     let nextButton = new ActionRowBuilder();
@@ -74,11 +74,11 @@ module.exports = {
                             .setLabel(`🤌`)
                             .setStyle(ButtonStyle.Success)
                     );
-                    await interaction.deferReply();
+                    await interaction.deferReply({ephemeral: true});
                     await interaction.editReply({ content: `${message} \nPress 🤌 a few times to crash me for a new question. 😜`, components: [nextButton], ephemeral: true});
                     logger.info(`InteractionAlreadyReplied Triggerpoint`); //todo Figure out to to handle interactions independently maybe using deferReply and editReply  
             } else if (interaction.customId == `answer-${answer}`) {
-                await interaction.deferReply();
+                await interaction.deferReply({ephemeral: true});
                 await interaction.editReply({content: `✅ That is **CORRECT**!`, ephemeral: true});
             } else {
                 let cheatButton = new ActionRowBuilder();
@@ -88,7 +88,7 @@ module.exports = {
                         .setLabel(`👀`)
                         .setStyle(ButtonStyle.Danger)
                 );
-                await interaction.deferReply();
+                await interaction.deferReply({ephemeral: true});
                 await interaction.editReply({content: `❌ That is **INCORRECT**!`, components: [cheatButton], ephemeral: true});
             }
         });
