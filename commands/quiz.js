@@ -76,7 +76,6 @@ module.exports = {
                     await interaction.reply({ content: `${message} \nPress🤌 three times to crash me for a new question. 😜`, components: [nextButton], ephemeral: true});
                     logger.info(`InteractionAlreadyReplied Triggerpoint`); //todo Figure out to to handle interactions independently  
             } else if (interaction.customId == `answer-${answer}`) {
-                leaderboard.info(`${interaction.id}, ${interaction.user.id}, ${question}, ${answer}, 1`);
                 await interaction.reply({content: `✅ That is **CORRECT**!`, ephemeral: true});
             } else {
                 let cheatButton = new ActionRowBuilder();
