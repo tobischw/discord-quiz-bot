@@ -1,6 +1,6 @@
 # Discord Quiz Bot
 
-## 🚨 Discord Quiz Bot is WIP and currently not functioning!
+## 🚨 Discord Quiz Bot is WIP!
 
 ## Dockerfile Commands
 1. docker build --tag discord-quiz-bot .
