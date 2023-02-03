@@ -1,10 +1,6 @@
 # Discord Quiz Bot
 
-## 🚨 Discord Quiz Bot is WIP!
-
-## Dockerfile Commands
-1. docker build --tag discord-quiz-bot .
-2. docker run -itd --network=host --restart=always discord-quiz-bot      
+## 🚨 Discord Quiz Bot is WIP and currently not functioning!
 
 ## How to Install/Run
 
@@ -32,8 +28,7 @@ Open `questions.json`. It is a JSON list of `Question`. The structure of a `Ques
 {
     "question": "What is the meaning of life?",
     "options": ["Nothing, life is meaningless", "42", "To chill, man, why are you asking me these questions?"],
-    "answer": 1,
-    "explanation": "C'est la vie!"
+    "answer": 1
 }
 ```
 

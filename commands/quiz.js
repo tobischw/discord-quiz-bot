@@ -4,16 +4,16 @@ const util = require("util");
 const { createLogger, format, transports } = require('winston');
 
 const logger = createLogger({
-    level: `info`,
+    level: 'info',
     format: format.json(),
-    defaultMeta: { service: `quiz` },
+    defaultMeta: { service: 'quiz' },
     transports: [
       //
       // - Write to all logs with level `info` and below to `console.log` 
       // - Write all logs error (and below) to `error.log`.
       //
-      new transports.File({ filename: `error.log`, level: `error` }),
-      new transports.File({ filename: `console.log` }),
+      new transports.File({ filename: 'error.log', level: 'error' }),
+      new transports.File({ filename: 'console.log' }),
       new transports.Console()
     ]
   });
@@ -22,8 +22,8 @@ const readFile = util.promisify(fs.readFile);
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName(`quiz`)
-		.setDescription(`A random quiz question. ***WARNING***  GHOST MODE Enabled!`),
+		.setName('quiz')
+		.setDescription('Displays a random quiz question for a minute.'),
 	async execute(interaction) {
         const data = await readFile("questions.json");
         const questions = JSON.parse(data);
@@ -32,7 +32,7 @@ module.exports = {
         const question = randomQuestion.question;
         const options = randomQuestion.options;
         const answer = randomQuestion.answer;
-        const explanation  = randomQuestion.explanation;
+        const explaination = `Because it is what it is`;
         const answerLetter = String.fromCharCode(65 + answer);
 
         let message = `${question}\n\n`;
@@ -50,28 +50,17 @@ module.exports = {
             )
         });
 
-        const filter = i => {
-            return i.user.id === interaction.user.id;
-        };
 
-        const collector = interaction.channel.createMessageComponentCollector({filter});
+
+        const collector = interaction.channel.createMessageComponentCollector({ time: 300000 });
 
         collector.on('collect', async interaction => {
             const answerOption = options[answer];
 
             if (interaction.customId == `answer-reveal`) {
-                await interaction.deferReply({ephemeral: true});
-                await interaction.editReply({ content: `The answer is ${answerLetter}: ${answerOption} \n ***Explaination*** \n${explanation}`, ephemeral: true });
+                await interaction.reply({ content: `The answer is ${answerLetter}: ${answerOption} \n ***Explaination*** \n${explaination}`, ephemeral: true });
             } else if (interaction.customId == `answer-${answer}`) {
-                let nextButton = new ActionRowBuilder();
-                nextButton.addComponents(
-                    new ButtonBuilder()
-                        .setCustomId(`answer-done`)
-                        .setLabel(`🤌`)
-                        .setStyle(ButtonStyle.Success)
-                );
-                await interaction.deferReply({ephemeral: true});
-                await interaction.editReply({content: `✅ That is **CORRECT**!\n\nPress 🤌 a few times to crash me for a new question. 😜`, components: [nextButton], ephemeral: true});
+                await interaction.reply(`✅ <@${interaction.user.id}> is **CORRECT**!`);
             } else {
                 let cheatButton = new ActionRowBuilder();
                 cheatButton.addComponents(
@@ -80,12 +69,23 @@ module.exports = {
                         .setLabel(`👀`)
                         .setStyle(ButtonStyle.Danger)
                 );
-                await interaction.deferReply({ephemeral: true});
-                await interaction.editReply({content: `❌ That is **INCORRECT**!`, components: [cheatButton], ephemeral: true});
+                await interaction.reply({content: `❌ <@${interaction.user.id}> is **INCORRECT**!`, components: [cheatButton]});
             }
         });
 
-        await interaction.reply({ content: message, components: [answerButtons], ephemeral: true });
+        await interaction.reply({ content: message, components: [answerButtons] });
 
+        collector.on('end', collected => {
+            let answerButtons = new ActionRowBuilder();
+            answerButtons.addComponents(
+                new ButtonBuilder()
+                    .setCustomId(`answer-done`)
+                    .setLabel(`🤌`)
+                    .setStyle(ButtonStyle.Success)
+            );
+
+            interaction.editReply({ content: `This question has expired! ${collected.size} Total Interactions`, components: [answerButtons] });
+            logger.info(`Collected ${collected.size} interactions.`);
+        });
 	},
 };
