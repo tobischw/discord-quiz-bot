@@ -1,272 +1,380 @@
 [
     {
-      "question": "What is the default subnet mask for a Class C IP address?",
-      "options": ["255.255.255.0", "255.0.0.0", "255.255.0.0"],
-      "answer": 0,
-      "explanation": "C'est la vie!"
-    },
-    {
-      "question": "What is the range of valid IP addresses for a Class C network?",
-      "options": ["192.0.0.0 to 223.255.255.255", "128.0.0.0 to 191.255.255.255", "224.0.0.0 to 239.255.255.255"],
+      "question": "You enable OSPF on R1's Serial-0 interface. By default, what is the OSPF network type of interface?",
+      "options": ["Broadcast", "Point-to-Point", "Non-Broadcast"],
       "answer": 1,
-      "explanation": "Because it helps megan study"
+      "explanation": "There are three main OSPF NW types, and which type an interface will be by default depends on the Layer 2 encapsulation used:"
     },
     {
-      "question": "What is the broadcast address for a host with IP address 192.168.1.25 and subnet mask 255.255.255.0?",
-      "options": ["192.168.1.255", "192.168.0.255", "192.168.1.0"],
+      "question": "Which takes precedence when deciding the OSPF RID?",
+      "options": ["Manual configuration", "Highest physical interface IP", "Highest loopback interface IP", "Lowest loopback interface IP"],
       "answer": 0,
-      "explanation": "Because it is what it is"
+      "explanation":"Manual configuration takes precedence. If the Router ID is not manually configured, the router will use the highest IP address configured on a loopback interface as the RID. If there is no loopback interface with an IP address, the router will use the highest IP address on a physical interface as the RID. If there is no physical interface with an IP address, the router will be unable to assign a RID and the OSPF process will be unable to start (see the error message below): %OSPF-4-NORTRID: OSPF process 1 failed to allocate unique router-id and cannot start"
     },
     {
-      "question": "What is the purpose of the default gateway in a TCP/IP network?",
-      "options": ["To provide access to the Internet", "To connect to a VPN", "To route traffic between subnets"],
-      "answer": 0,
-      "explanation": "C'est la vie!"
+      "question": "R1 learns four routes to destination 172.16.0.0/24 via dynamic routing protocols. Which route will be inserted into the routing table?",
+      "options": ["EIGRP route: metric 1000", "EIGRP route: metric 100", "OSPF route: metric 10", "RIP route: metric 1"],
+      "answer": 1,
+      "explanation": "When a router learns multiple routes to the same destination via multiple routing protocols, it will use the Administrative Distance (AD) of the routing protocols to determine which route is superior (lower is superior). EIGRP’s default AD is 90, OSPF’s 110, and RIP’s 120, so EIGRP routes are considered superior to OSPF and RIP routes. However, R1 learned two routes via EIGRP, so it will use the metric of the routes to determine which is superior of the two (lower is superior). The metric in ‘B’ is lower than ‘A’, so ‘B’ is the correct answer."
     },
     {
-      "question": "What is the purpose of the ping command in a TCP/IP network?",
-      "options": ["To determine the path taken by packets", "To verify the IP address of a host", "To test connectivity between two devices"],
+      "question": "Which of the following messages is sent by DHCP client?",
+      "options": ["OFFER", "ACK", "RELEASE", "NAK"],
       "answer": 2,
-      "explanation": "Because it helps megan study"
+      "explanation": "Offer and ACK are sent by DHCP server. NAK isn't a DHCP message type. So last message is Release which is from the DHCP client using command prompt vommand Ipconfig Release."
     },
     {
-      "question": "What is the purpose of Address Resolution Protocol (ARP)?",
-      "options": ["To map an IP address to a physical address", "To map a physical address to an IP address", "To map a domain name to an IP address"],
+      "question": "R1 learns the following routes via dynamic routing protocols:\n192.168.0.0/29 via RIP\n192.168.0.0/24 via EIGRP\nWhich route(s) will be added to R1's routing table?",
+      "options": ["Both of them", "192.168.0.0/24", "192.168.0.0/29", "Neither of them"],
       "answer": 0,
-      "explanation": "Because it is what it is"
+      "explanation": "Although the network address of each destination is the same (192.168.0.0) and the 192.168.0.0/29 network is a subnet of the 192.168.0.0/24 network, because each has a different prefix length (/24 and /29) they are considered different destinations. So, both routes will be added to the routing table. AD and Metric are only used to select among routes to the same destination (ie. two routes to 192.168.0.0/24), not to select among routes to different destinations (192.168.0.0/24 and 192.168.0.0/29)."
     },
     {
-      "question": "What is the purpose of Internet Control Message Protocol (ICMP)?",
-      "options": ["To provide error reporting for IP", "To provide flow control for TCP", "To provide reliable delivery for UDP"],
-      "answer": 0,
-      "explanation": "C'est la vie!"
-    },
-    {
-      "question": "What is the purpose of the Network Address Translation (NAT)?",
-      "options": ["To translate private addresses to public addresses", "To translate public addresses to private addresses", "To translate IP addresses to domain names"],
-      "answer": 0,
-      "explanation": "Because it is what it is"
-    },
-    {
-      "question": "What is the purpose of the Border Gateway Protocol (BGP)?",
-      "options": ["To provide routing information between networks", "To provide access control between networks", "To provide encryption between networks"],
-      "answer": 0,
-      "explanation": "Because it is what it is"
-    },
-    {
-      "question": "What is the purpose of Simple Network Management Protocol (SNMP)?",
-      "options": ["To manage network devices", "To provide secure communications between devices", "To provide error reporting for IP"],
-      "answer": 0,
-      "explanation": "C'est la vie!"
-    },
-    {
-      "question": "What is the largest animal in the world?",
-      "options": ["Elephant", "Blue Whale", "Giraffe", "Kangaroo"],
+      "question": "which of the follo ing fields is used to mark a packet at layer 3?",
+      "options": ["NBAR", "DSCP", "PCP", "CoS"],
       "answer": 1,
-      "explanation": "The Blue Whale is the largest animal in the world, reaching lengths of up to 100 feet and weights of over 200 tons."
+      "explanation": "DSCP is a 6-byte field in the ToS (Type of Service) byte of the IPv4 header. It is used for QoS markings at Layer 3. NBAR (Network Based Application Recognition) is used to perform a 'deep packet inspection', examining contents beyond Layer 4 to identify the type of traffic. It is not used to mark packets. PCP and CoS refer to the same 3-bit field in the 802.1q tag, used for QoS markings at Layer 2."
     },
     {
-      "question": "What is the fastest land animal?",
-      "options": ["Lion", "Cheetah", "Gazelle", "Hare"],
-      "answer": 1,
-      "explanation": "The Cheetah is the fastest land animal, capable of reaching speeds of up to 60 miles per hour."
-    },
-    {
-      "question": "What is the tallest mammal?",
-      "options": ["Giraffe", "Elephant", "Hippopotamus", "Gorilla"],
+      "question": "Which of the following EtherChannel mode pairs results in a valid port channel?",
+      "options": ["Active + Passive", "Active + Auto", "Desirable + Active", "Desirable + Passive"],
       "answer": 0,
-      "explanation": "The Giraffe is the tallest mammal, with some individuals reaching heights of up to 18 feet."
+      "explanation": "EtherChannels using LACP have two modes: Active and *Passive*. The following LACP mode combinations will result in a valid LACP port channel: active+active , active+passive.\nEtherChannels using PAgP have two modes: Desirable and *Auto*. The following LACP mode combinations will result in a valid LACP port channel: desirable+desirable , desirable+auto ."
     },
     {
-      "question": "What is the smallest mammal?",
-      "options": ["Pygmy Marmoset", "Kangaroo", "Elephant", "Gorilla"],
-      "answer": 0,
-      "explanation": "The Pygmy Marmoset is the smallest mammal, with adults reaching lengths of only 5 to 6 inches."
-    },
-    {
-      "question": "What is the fastest bird?",
-      "options": ["Peregrine Falcon", "Eagle", "Ostrich", "Penguin"],
-      "answer": 0,
-      "explanation": "The Peregrine Falcon is the fastest bird, capable of diving at speeds of over 200 miles per hour."
-    },
-    {
-      "question": "What is the largest bird in the world?",
-      "options": ["Ostrich", "Pelican", "Eagle", "Penguin"],
-      "answer": 0,
-      "explanation": "The Ostrich is the largest bird in the world, reaching heights of up to 9 feet and weights of over 300 pounds."
-    },
-    {
-      "question": "What is the largest reptile in the world?",
-      "options": ["Komodo Dragon", "Crocodile", "Anaconda", "Iguana"],
-      "answer": 1,
-      "explanation": "The Saltwater Crocodile is the largest reptile in the world, with some individuals reaching lengths of up to 23 feet and weights of over 1,000 pounds."
-    },
-    {
-      "question": "What is the fastest fish in the ocean?",
-      "options": ["Sailfish", "Shark", "Tuna", "Marlin"],
-      "answer": 0,
-      "explanation": "The Sailfish is the fastest fish in the ocean, capable of swimming at speeds of up to 68 miles per hour."
-    },
-    {
-      "question": "What is the oldest zoo in the world?",
-      "options": ["Vienna Zoo", "Berlin Zoo", "Schönbrunn Zoo", "London Zoo"],
+      "question": "Which address does a router send OSPF Hello messages to when trying to discover neighbors?",
+      "options": ["224.0.0.1", "224.0.0.2", "224.0.0.5", "224.0.0.6"],
       "answer": 2,
-      "explanation": "Schönbrunn Zoo in Vienna, Austria is the oldest zoo in the world, established in 1752."
+      "explanation": "OSPF Hello messages are sent to multicast address 224.0.0.5. The purpose of each address in the question is as follows:\n224.0.0.1 = Message for all hosts on the segment\n224.0.0.2 = Message for all routers on the segment\n224.0.0.5 = Messages for all OSPF routers on the segment\n224.0.0.6 = Message for all OSPF DRs/BDRs on the segment"
     },
     {
-      "question": "What is the largest zoo in the world?",
-      "options": ["San Diego Zoo", "Toronto Zoo", "Moscow Zoo", "Beijing Zoo"],
-      "answer": 0,
-      "explanation": "The San Diego Zoo in California, USA is the largest zoo in the world, covering over 100 acres and housing over 3,700 animals."
-    },
-    {
-      "question": "Which zoo is known for its giant pandas?",
-      "options": ["Beijing Zoo", "Toronto Zoo", "San Diego Zoo", "Berlin Zoo"],
-      "answer": 0,
-      "explanation": "The Beijing Zoo in China is known for its giant pandas, which are considered a national symbol in China."
-    },
-    {
-      "question": "Which zoo is famous for its white tigers?",
-      "options": ["Toronto Zoo", "San Diego Zoo", "Nandankanan Zoological Park", "Moscow Zoo"],
-      "answer": 2,
-      "explanation": "Nandankanan Zoological Park in Odisha, India is famous for its white tigers."
-    },
-    {
-      "question": "Where is the zoo that has the largest collection of reptiles in the world?",
-      "options": ["London Zoo", "Vienna Zoo", "San Diego Zoo", "Crocodile Park"],
+      "question": "Which of the following application-layer protocols uses both TCP and UDP?",
+      "options": ["Telnet", "DHCP", "NTP", "DNS"],
       "answer": 3,
-      "explanation": "Crocodile Park in Cairns, Australia has the largest collection of reptiles in the world."
+      "explanation": "Telnet uses TCP port 23.\nDHCP uses TCP ports 67/68.\nNTP uses UDP port 123.\nDNS uses UDP port 53 and TCP port 53. For standard DNS requests UDP is used, but for 'Zone Transfers' and some other cases TCP is used.\nCheck out https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/dns-works-on-tcp-and-udp for more information."
     },
     {
-      "question": "Which zoo has the largest collection of primates in the world?",
-      "options": ["San Diego Zoo", "Johor Bahru Zoo", "Toronto Zoo", "Apenheul Primate Park"],
+      "question": "What DSCP marking value is recommended for voice traffic",
+      "options": ["46", "63", "32", "40"],
+      "answer": 0,
+      "explanation": "The DSCP marking 'EF' (Expedited Forwarding) is recommended for voice traffic. EF uses the bit pattern 101110 in the DSCP field of the IP header, which is 46 in decimal."
+    },
+    {
+      "question": "Which Rapid Spanning Tree Protocol port state is a combination of standard 802.1D STP's disabled, blocking and listening states?",
+      "options": ["Blocking", "Discarding", "Learning", "Forwarding", "Listening"],
+      "answer": 2,
+      "explanation": "Rapid Spanning Tree Protocol (RSTP) defines three port states, compared with 802.1D STP's five states. RSTP combines the disabled, blocking and listening states into a single port state known as discarding. The reason for the combination is because a port in a disabled, blocking or listening state doesn't differ from an STP topology perspective. Each of these states discards all frames and isn't actively learning the media access control (MAC) addresses of connected switches and devices."
+    },
+    {
+      "question": "Host A receives a frame and discards it after determining it is corrupt. Which OSI layer checks frames for errors?",
+      "options": ["Application", "Network", "Physical", "Data-link", "Frame Check Sequence", "Cyclic Redundancy Check"],
       "answer": 3,
-      "explanation": "Apenheul Primate Park in Apeldoorn, Netherlands has the largest collection of primates in the world."
+      "explanation": "The data-link layer is responsible for checking each received frame for errors. Every Ethernet frame includes the frame check sequence (FCS) or cyclic redundancy check value that is calculated by the host that sent the frame. The receiving host generates its own FCS value for every frame received and then compares it with the FCS included in the frame. If the FCS values match, the frame has arrived without any error. If the FCS values don't match, then the host assumes the frame has an error or is corrupt and, therefore, discards it. More information on Ethernet frames can be found on Firewall.cx's Ethernet frame analysis page (https://www.firewall.cx/networking-topics/ethernet/ethernet-frame-formats/201-ethernet-ii.html)."
     },
     {
-      "question": "Where is the world's first open-air cage-less zoo located?",
-      "options": ["Zoo de Vincennes", "Apenheul Primate Park", "Tierpark Berlin", "Zoo Atlanta"],
-      "answer": 1,
-      "explanation": "The world's first open-air cage-less zoo is Apenheul Primate Park in Apeldoorn, Netherlands."
-    },
-    {
-      "question": "Which zoo is famous for its African savanna exhibit?",
-      "options": ["San Diego Zoo", "Toronto Zoo", "Berlin Zoo", "Serengeti Park"],
+      "question": "No matter how it's configured, a single switch port is considered what?",
+      "options": ["A separate unicast domain", "A separate boradcast domain", "A separate multicast domain", "A separate collision domain"],
       "answer": 3,
-      "explanation": "Serengeti Park in Hodenhagen, Germany is famous for its African savanna exhibit."
+      "explanation": "Unlike a network hub, which is a single collision domain for all ports, each port on a Layer 2 switch is a separate collision domain."
     },
     {
-      "question": "What is a group of cats called?",
-      "options": ["Flock", "Herd", "Clowder", "Pack"],
+      "question": "Identify which of the services below uses both TCP and UDP ports.",
+      "options": ["FTP", "TFTP", "DNS", "SSH", "Telnet"],
       "answer": 2,
-      "explanation": "A group of cats is called a clowder."
+      "explanation": "The DNS protocol is the only protocol of those listed above that uses both the Transmission Control Protocol (TCP) and the User Datagram Protocol (UDP). UDP is the preferred transport protocol for DNS services because it is fast. UDP doesn't require a connection to be established between the hosts before sending any data. If a host fails to receive a response from a DNS server after several requests, it can then switch to TCP. TCP is slower, but more reliable, because it requires a three-way handshake to be established between the hosts before any data is sent."
     },
     {
-      "question": "What is the average lifespan of a domestic cat?",
-      "options": ["10 years", "12 years", "15 years", "20 years"],
-      "answer": 1,
-      "explanation": "The average lifespan of a domestic cat is 12 to 15 years."
-    },
-    {
-      "question": "What is the world's largest breed of cat?",
-      "options": ["Maine Coon", "Ragdoll", "Siberian", "Persian"],
-      "answer": 0,
-      "explanation": "The Maine Coon is the world's largest breed of cat."
-    },
-    {
-      "question": "What is the average number of kittens in a cat's litter?",
-      "options": ["2-3", "4-5", "6-7", "8-9"],
-      "answer": 1,
-      "explanation": "The average number of kittens in a cat's litter is 4 to 5."
-    },
-    {
-      "question": "What is the term used to describe a cat's fear of water?",
-      "options": ["Aquaphobia", "Hydrophobia", "Aquaticophobia", "Aquaticaphobia"],
-      "answer": 1,
-      "explanation": "The term used to describe a cat's fear of water is hydrophobia."
-    },
-    {
-      "question": "What is the most common eye color of cats?",
-      "options": ["Green", "Blue", "Yellow", "Brown"],
-      "answer": 1,
-      "explanation": "The most common eye color of cats is blue."
-    },
-    {
-      "question": "What is the term used to describe a cat's ability to always land on its feet?",
-      "options": ["Righting reflex", "Uprighting reflex", "Landing reflex", "Falling reflex"],
-      "answer": 0,
-      "explanation": "The term used to describe a cat's ability to always land on its feet is called the righting reflex."
-    },
-    {
-      "question": "What is the average weight of a fully grown domestic cat?",
-      "options": ["5-10 pounds", "10-15 pounds", "15-20 pounds", "20-25 pounds"],
-      "answer": 0,
-      "explanation": "The average weight of a fully grown domestic cat is 5 to 10 pounds."
-    },
-    {
-      "question": "What is the name for a female cat?",
-      "options": ["Tom", "Queen", "Sire", "Dam"],
-      "answer": 1,
-      "explanation": "The name for a female cat is a queen."
-    },
-    {
-      "question": "What is the name for a neutered male cat?",
-      "options": ["Tom", "Queen", "Gib", "Stray"],
-      "answer": 2,
-      "explanation": "The name for a neutered male cat"
-    },
-    {
-      "question": "What is the largest species of bird in the world?",
-      "options": ["Ostrich", "Emu", "Andean Condor", "California Condor"],
-      "answer": 0,
-      "explanation": "The largest species of bird in the world is the Ostrich."
-    },
-    {
-      "question": "What is the smallest species of bird in the world?",
-      "options": ["Bumblebee Hummingbird", "Bee Hummingbird", "Ruby-throated Hummingbird", "Buff-bellied Hummingbird"],
-      "answer": 0,
-      "explanation": "The smallest species of bird in the world is the Bumblebee Hummingbird."
-    },
-    {
-      "question": "What is the name for a group of crows?",
-      "options": ["Herd", "Flock", "Murder", "Gaggle"],
-      "answer": 2,
-      "explanation": "The name for a group of crows is a murder."
-    },
-    {
-      "question": "What is the name for a group of parrots?",
-      "options": ["Herd", "Flock", "Murder", "Puzzle"],
+      "question": "A router with a BGP autonomous system number of 65001 is peered with another router with the same BGP AS. Which of the following is true?",
+      "options": ["The ebgp multihop command must be configured to reach an established state", "A BGP connection will be established, but no traffic will traverse the connection", "The routers are considered eBGP neighbors", "the routers are considered iBGP neighbors", "A BGP establishment error will occur because of the AS conflict"],
       "answer": 3,
-      "explanation": "The name for a group of parrots is a puzzle."
+      "explanation": "When two routers belong to the same autonomous system bearing the same AS number, they are considered internal BGP, or iBGP, neighbors. This also means the routes learned between these neighbors use the internal BGP administrative distance of 200, as opposed to the external AD of 20."
     },
     {
-      "question": "What is the name for a group of owls?",
-      "options": ["Herd", "Flock", "Parliament", "Gaggle"],
+      "question": "What is the default 802.1D short spanning tree port cost of a 10 Gbps Ethernet link?",
+      "options": ["10", "4", "2", "2000"],
       "answer": 2,
-      "explanation": "The name for a group of owls is a parliament."
+      "explanation": "By default, the 802.1D path cost for a 10 Gbps link is 2 using the short 16-bit method. If you calculate the same link using the long 32-bit method, you get a default value of 2,000."
     },
     {
-      "question": "What is the term used to describe a bird's ability to fly long distances without rest?",
-      "options": ["Migration", "Flying", "Soaring", "Gliding"],
-      "answer": 0,
-      "explanation": "The term used to describe a bird's ability to fly long distances without rest is migration."
+      "question": "https://cdn.ttgtmedia.com/rms/onlineimages/networking-ccna_exam_01.png, After carefully examining the network diagram above, select the correct statement regarding broadcast and collision domains.",
+      "options": ["There is one broadcast domain and seven collision domains", "there are two broadcast domains and five collision domains", "there is one broadcast domain and 12 collision domains", "there are two broadcast domains and seven collision domains", "there are two broadcast domains and 12 collision domains"],
+      "answer": 3,
+      "explanation": "Each link to a switch -- switch port -- is a separate collision domain. In our diagram, we have two switches and a total of seven links. Hubs -- located in the lower left corner of the image -- do not create separate collision domains per link. That's because traffic entering one port exits all other ports. Routers, on the other hand, create separate broadcast domains, as broadcast packets do not propagate across them."
     },
     {
-      "question": "What is the name for a young bird?",
-      "options": ["Nestling", "Chick", "Fledgling", "Brood"],
+      "question": "https://cdn.ttgtmedia.com/rms/onlineimages/networking-ccna_exam_02.png, Your manager has requested you indicate which of the above ports will be Spanning Tree Protocol-designated ports.",
+      "options": ["Switch V1, Port Fa0/0; Switch V3, Port Fa0/0; Switch V3, Port Fa0/24", "Switch V1, Port Fa0/24; Switch V2, Port Fa0/0; Switch V2, Port Fa0/24"],
       "answer": 1,
-      "explanation": "The name for a young bird is a chick."
+      "explanation": "The first step is to understand which switch will become the root switch. This is done via a process called the STP root bridge election process. According to this process, the switch with the lowest bridge ID will be elected as the root switch. In our network diagram, that's SwitchV2. As per STP protocol, SwitchV2 will have all ports set to STP designated. Ports Fa0/0 on SwitchV1 and SwitchV3 are used to reach the root switch and are, therefore, designated STP root ports. The last set of ports to examine is Fa0/24 on SwitchV1 and SwitchV3. Between these two, one port must be set to blocking mode in order to avoid creating a loop in our network, while the other will be set to forwarding mode. SwitchV1 wins because it has a lower MAC address, so SwitchV1 Fa0/24 is set to forwarding and becomes an STP-designated port, while SwitchV3 Fa0/24 turns to a blocking state.\nDetailed examples and analysis on STP, bridge election and STP port states can be found on Firewall.cx's STP section (http://www.firewall.cx/networking-topics/protocols/spanning-tree-protocol.html)."
     },
     {
-      "question": "What is the term used to describe a bird's nest?",
-      "options": ["Roost", "Perch", "Home", "Rookery"],
-      "answer": 0,
-      "explanation": "The term used to describe a bird's nest is a roost."
+      "question": "Which of the following EXEC commands will reset LLDP traffic error counters?",
+      "options": ["clear lldp", "clear lldp all", "clear table lldp", "clear lldp table", "clear lldp counters"],
+      "answer": 4,
+      "explanation": "The correct syntax to reset Link Layer Discovery Protocol (LLDP) traffic and error counters to zero is clear lldp counters. The clear lldp table command will delete the LLDP table of any information about learned neighbors. All other answers have incorrect or incomplete syntax."
     },
     {
-      "question": "What is the name for a bird's eggs?",
-      "options": ["Nest", "Clutch", "Brood", "Bunch"],
+      "question": "One of the routers in your company has just received information about network 172.16.10.0/24 from multiple sources. Which of the below will the router consider as the most reliable source for network 172.16.10.0/24?",
+      "options": ["An EIGRP update for network 172.16.10.0/24", "An OSPF update for network 172.16.10.0/24", "A static route to network 172.16.10.0/24", "A default route with a next hop address of 172.16.0.1", "A directly connected interface with an IP address of 172.16.10.254/24", "None of the above, The router will discard the update"],
+      "answer": 4,
+      "explanation": "The administrative distance is used by a router to determine which routing protocol to use if two or more protocols provide routing information for the same destination network. The smaller the administrative distance is, the higher the preference. Directly connected interfaces have an AD of 0 and are always preferred. Static routes have an AD of 1, while the Enhanced Interior Gateway Routing Protocol (EIGRP) has an AD of 90, and Open Shortest Path First (OSPF) has an AD of 110."
+    },
+    {
+      "question": "https://cdn.ttgtmedia.com/rms/onlineimages/networking-ccna_exam_03.png, In the network diagram above, which path will packets take when traveling from host 192.168.50.126 to host 192.168.50.5?",
+      "options": ["Packets will travel from R3 to R2 to R1", "Packets will travel from R1 to R3 to R2.", "Packets will travel from R3 to R1 and return back to R3", "Packets will travel from R3 to R1 and from R3 to R2 to R1", "Packets will travel from R1 to R2 and back"],
+      "answer": 3,
+      "explanation": "We begin by identifying to which network host 192.168.50.126 belongs. IP address 192.168.50.126 is the last usable address for network 192.168.50.64/26, which means it is directly connected to Router 3. Next, we need to identify where 192.168.50.5 is located. By examining the diagram, we can see IP 192.168.50.5 is Router 1's interface that connects directly with Router 2. Finally, to understand the path packets will take, we examine the output of Router 3's routing table and discover there are two equal cost links to network 192.168.50.4/30. So, EIGRP will load-balance between both paths."
+    },
+    {
+      "question": "Which of the following options are used in standard access lists?",
+      "options": ["Destination address and subnet mask", "Source address and subnet mask", "Destination address and wildcard mask", "Source address and wildcard mask"],
+      "answer": 3,
+      "explanation": "Standard access lists provide a simple set of options: the source address and wildcard mask. Extended access lists offer additional options -- source address, destination address, wildcard mask, protocol and ports -- thus providing greater granularity. In both cases, it's important to remember access lists always use the wildcard mask, which is the reverse of a subnet mask"
+    },
+    {
+      "question": "When configuring NAT, what is the purpose of the overload command, as used in the following example:\nRouter(config)#ip nat inside source list 1 interface gi0/2 overload",
+      "options": ["It translates a single local address into many global addresses by tracking the connection's UDP port number", "It indicates a one-to-one translation on the interface by tracking the connection's TCP port numbe", "It translates many local addresses into a single global address by tracking the connection's TCP port number", "It translates a single local address into many global addresses by tracking the connection's TCP port number", "It translates many local addresses into a single global address by tracking the connection's UDP port number"],
+      "answer": 2,
+      "explanation": "The example configuration will use the single IP address assigned to interface gi0/2. Any internal -- local -- IP that attempts to communicate with a device on the other side of gi0/2 will be translated to this single address. The router will maintain a NAT table for this connection. This table contains the local IP address of the internal device, the single IP to which it is translated and a unique TCP port number that is used to identify packets within that particular conversation."
+    },
+    {
+      "question": "Which statement about NTP is true?",
+      "options": ["A stratum 2 NTP server is directly attached to an authoritative time source", "NTP must be configured to synchronize with one of a handful of atomic clocks available on the internet", "NTP authentication is disabled by default", "You must configure two or more NTP sources for times to be accurat"],
+      "answer": 2,
+      "explanation": "By default, NTP authentication is disabled. To configure it, you must set the authentication-key, trusted-key number and then enable the features using the ntp authenticate command."
+    },
+    {
+      "question": "https://cdn.ttgtmedia.com/rms/editorial/091919_sNet_DHCP-server.png, What actions does the DHCP server take when there is an IP address conflict, as shown above?",
+      "options": ["The DHCP server will automatically resolve all conflicts after their lease is over", "The IP addresses are removed from the DHCP pool until the conflicts are resolved", "The IP addresses detected by gratuitous Address Resolution Protocol are removed from the pool", "The IP addresses detected by ping are removed from the pool", "The DHCP server needs to be restarted in order to automatically clear all conflicts"],
       "answer": 1,
-      "explanation": "The name for a bird's eggs is a clutch."
+      "explanation": "When a Cisco DHCP server discovers a conflict, it will place the IP address into the conflict table, stating the address was conflicting and how it came to that conclusion, as noted under the detection method column. The administrator must examine each IP address and detection method and, when ready, clear the IP addresses from the conflict pool. More information on each detection method and commands to clear them can be found on Firewall.cx's DHCP article (http://www.firewall.cx/cisco-technical-knowledgebase/cisco-switches/1063-cisco-switch-router-dhcp-server-conflicts.html)."
+    },
+    {
+      "question": "What would the result be when the following commands are executed on a Cisco Catalyst switch:\nTechTarget-SW1 (config-if)# switchport port-security\nTechTarget-SW1 (config-if)# switchport port-security mac-address sticky",
+      "options": ["The MAC address learned dynamically is saved in the switch's running-configuration", "The MAC address learned dynamically is saved in the switch's startup configuration", "The MAC address learned dynamically is saved permanently in the VLAN database", "The statically configured MAC address is saved in the switch's running configuration when frames from that address are received", "The first MAC address seen on the specific port is allowed to access the network until the port security timer expires"],
+      "answer": 0,
+      "explanation": "When the switch port-security mac-address sticky command is used without specifying a MAC address at the end, the MAC address of the attached device is dynamically learned and placed in the running configuration of the switch."
+    },
+    {
+      "question": "Which of the following is not an IPv6 address type?",
+      "options": ["Broadcast", "Unicast", "Anycast", "Multicast"],
+      "answer": 0,
+      "explanation": "Unlike IPv4, the IP version 6 (IPv6) protocol does not use a broadcast address type. For bandwidth efficiency purposes, the duties of IPv4's broadcast addressing have been incorporated into IPv6 multicast addressing."
+    },
+    {
+      "question": "A router has two identical default routes to 10.0.0.0/24. One route is learned via EIGRP, and the other is a static route. Which of the following commands will set the static route so it's only used in the event the EIGRP route is no longer available?",
+      "options": ["ip route 10.0.0.0 255.0.0.0 192.168.1.254 10", "ip route 10.0.0.0 255.0.0.0 192.168.1.254 100", "ip route 10.0.0.0 255.0.0.0 192.168.1.254 distance 10", "ip route 10.0.0.0 255.0.0.0 192.168.1.254 distance 100"],
+      "answer": 2,
+      "explanation": "Adjusting the administrative distance so it is higher than a dynamically learned AD is known as a floating static route. Floating static routes are often used as a failover mechanism in the event the dynamically learned path fails. The proper syntax to change the AD is to simply type it at the end of the next-hop route. The distance can be set to anything between 1 and 255. In this example, the AD must be set higher than 90, as this is the default AD used by internal EIGRP."
+    },
+    {
+      "question": "Which Ethernet switching method would you use if low latency is of utmost importance?",
+      "options": ["First in first out", "Store and forward", "Cut through", "Cisco Express Forwarding (CEF)", "Queueing"],
+      "answer": 2,
+      "explanation": "Cut-through provides the lowest-latency switching available. It forwards Ethernet packets faster than any other method, because it only waits to read the destination MAC address before forwarding."
+    },
+    {
+      "question": "What does a PC broadcast to learn an unknown MAC address?",
+      "options": ["ICMP Request", "ARP Reply", "ICMP Reply", "ARP Request", "None of them"],
+      "answer": 3,
+      "explanation": ""
+    },
+    {
+      "question": "DSCP bits are ... bits.",
+      "options": ["6", "2", "4", "5", "3"],
+      "answer": 0,
+      "explanation": ""
+    },
+    {
+      "question": "Which ones of these are important QoS Enemies?",
+      "options": ["CIR", "Jitter", "Packet Check"],
+      "answer": 1,
+      "explanation": ""
+    },
+    {
+      "question": "netconf and ... are the Southbound Interface API, that provide the communication of SDN Controller and SDN Data Plane devices.",
+      "options": ["REST", "SNMP", "Open Flow", "All the above"],
+      "answer": 2,
+      "explanation": ""
+    },
+    {
+      "question": "Which Cisco command shows OSPF neighbor adjacencies?",
+      "options": ["Debug ip OSPF neighbor", "Show ip OSPF neighbor", "Show ip OSPF", "Show Protocols", "Show ip OSPF database"],
+      "answer": 1,
+      "explanation": ""
+    },
+    {
+      "question": ".... is the attack type in which routing table is manuplated by attackers.",
+      "options": ["Rerouting", "Ping of Death", "Session Hijacking", "DNS Spoofing", "Replay Attack"],
+      "answer": 0,
+      "explanation": ""
+    },
+    {
+      "question": "If there are centralized WLAN Controllers in each site and Access Points that are connected to this WLC, this is ...",
+      "options": ["Centralized Wireless Network Design", "Flexconnect Wireless Network Design", "SD-Access Wireless Network Design", "Classic Wireless Network Design", "None of them"],
+      "answer": 0,
+      "explanation": ""
+    },
+    {
+      "question": "QoS .... is the mechanism that is used during a Traffic Exceed. The Exceed Traffic is buffered and with a little delay, it is sent again.",
+      "options": ["Traffic Selecting", "Traffic Determining", "Traffic Monitoring", "Traffic Policing", "Traffic Shaping"],
+      "answer": 4,
+      "explanation": ""
+    },
+    {
+      "question": "IP is a Connectionless Protocol",
+      "options": ["True", "False"],
+      "answer": 0,
+      "explanation": ""
+    },
+    {
+      "question": "How can we turn to Privileged mode from Interface configuration mode on Cisco routers?",
+      "options": ["Ctrl-Z", "Ctrl-A", "Ctrl-P", "Esc", "Ctrl-Alt-Del", "Pressing the Power Button"],
+      "answer": 0,
+      "explanation": ""
+    },
+    {
+      "question": "Which ones are one of the two main types of Site to Site VPN?",
+      "options": ["Internet Based VPN", "Included Based VPN", "Excluded Based VPN", "Extranet Based VPN"],
+      "answer": 3,
+      "explanation": ""
+    },
+    {
+      "question": "Which one of the following is used to build Switching Table?",
+      "options": ["Destination Ip", "Source IP", "Source MAC", "Mac Addresses", "All the Above"],
+      "answer": 2,
+      "explanation": ""
+    },
+    {
+      "question": "IPv6 Link Local Addresses can be configured in two ways. Auto-Address Configuration and Manual Configuration.",
+      "options": ["True", "False"],
+      "answer": 0,
+      "explanation": ""
+    },
+    {
+      "question": "Which ones are some of the Denial of Service Attacks?",
+      "options": ["Man in the Middle", "Arp Spoofing", "TCP SYN Flood", "DNS Spoofing", "CSRF"],
+      "answer": 2,
+      "explanation": ""
+    },
+    {
+      "question": "How to open debug for nat?",
+      "options": ["Run Nat", "Debug Nat stats", "Debug ip Nat", "Start Nat", "Debug Start Nat"],
+      "answer": 2,
+      "explanation": ""
+    },
+    {
+      "question": "Which ones are the benefits of Network Automation?",
+      "options": ["More Staff Need", "Higher Errors", "High Pay Raise", "Increased Business Agility"],
+      "answer": 3,
+      "explanation": ""
+    },
+    {
+      "question": "Which of these are the protocols used between WLC and LWAP?",
+      "options": ["ICMP", "LLDP", "BDSM", "CAPWAP", "CDP"],
+      "answer": 3,
+      "explanation": ""
+    },
+    {
+      "question": "Which one is a Distance Vector Protocol?",
+      "options": ["OSPF", "EIGRP", "RIP", "IS-IS", "BGP"],
+      "answer": 2,
+      "explanation": ""
+    },
+    {
+      "question": "Dynamic ARP Inspection (DAI) uses Trust states for interfaces. Which ones are these are one of the two trust states?",
+      "options": ["Active", "Trusted", "Inabled", "Passive"],
+      "answer": 1,
+      "explanation": ""
+    },
+    {
+      "question": ".... is simply the technical term for a network name.",
+      "options": ["SSID", "VLAN-ID", "Router-ID", "WLAN-ID", "WID"],
+      "answer": 0,
+      "explanation": ""
+    },
+    {
+      "question": "Which ones are true about TCP & UDP?",
+      "options": ["UDP has guaranteed transmission", "There is no error checking mechanism in UDP", "TCP is a secure Protocol UDP is not Secure", "TCP has 8 bit headers"],
+      "answer": 2,
+      "explanation": ""
+    },
+    {
+      "question": "Which ones are the main characteristic of the REST?",
+      "options": ["Scalable", "Platform-agnostic", "Flexible", "Lightweight", "All of them"],
+      "answer": 4,
+      "explanation": ""
+    },
+    {
+      "question": "Which of the following protocols is used to eliminate Layer 2 loops?",
+      "options": ["VTP", "IP", "ARP", "OSPF", "STP"],
+      "answer": 4,
+      "explanation": ""
+    },
+    {
+      "question": "Which of the following are Fast Ethernet technologies?",
+      "options": ["100BASE-FX", "100BASE2", "1000BASE-F", "100BASE-5"],
+      "answer": 0,
+      "explanation": ""
+    },
+    {
+      "question": "With which mode access point can connect to another access point as a client?",
+      "options": ["Local Mode", "SE-Connect Mode", "Client Mode", "Sniffer Mode", "Rouge Detector Mode"],
+      "answer": 2,
+      "explanation": ""
+    },
+    {
+      "question": "A VLAN trunked link belong to which VLAN by Default?",
+      "options": ["VLAN 1", "VLAN 10", "VLAN 0", "None of them", "ALL VLANs"],
+      "answer": 4,
+      "explanation": ""
+    },
+    {
+      "question": "How to enable DHCP Snooping on Cisco devices?",
+      "options": ["Ruın dhcp snooping", "Ip DHCP Snooping", "Enable snooping", "DHCP snooping start", "Run snooping"],
+      "answer": 1,
+      "explanation": ""
+    },
+    {
+      "question": "Which ones are related to RADIUS?",
+      "options": ["UDP Port 1812,1645", "Bidirectional CHAP", "TCP Port 49", "Bidirectional CHAP"],
+      "answer": 0,
+      "explanation": ""
+    },
+    {
+      "question": "Neighbour Discovery Protocols work on ....",
+      "options": ["Layer 1", "Layer 5", "Layer 2", "Layer 3", "Layer 4"],
+      "answer": 2,
+      "explanation": ""
+    },
+    {
+      "question": "How to enable syslog on cisco routers?",
+      "options": ["Logging start", "Logging run", "Run logging", "Start logging", "Logging on"],
+      "answer": 4,
+      "explanation": ""
+    },
+    {
+      "question": "For a Class C IPv4 Address, how many usable hosts are there by default?",
+      "options": ["254", "64516", "65536", "255", "32768"],
+      "answer": 0,
+      "explanation": ""
+    },
+    {
+      "question": "What is the broadcast address for a Class C address of 192.168.145.0 with default Subnet Mask?",
+      "options": ["192.168.0.0", "192.168.145.254", "192.168.145.1", "192.168.145.255", "192.168.145.0"],
+      "answer": 3,
+      "explanation": ""
+    },
+    {
+      "question": "Which ones are the Wireless SEcurity Protocols?",
+      "options": ["WEP", "WPA", "WPA3", "WPA2", "All of them"],
+      "answer": 4,
+      "explanation": ""
+    },
+    {
+      "question": "Which ones are FTP port numbers?",
+      "options": ["21", "15", "25", "32", "80"],
+      "answer": 0,
+      "explanation": ""
     }
-]  
+]
