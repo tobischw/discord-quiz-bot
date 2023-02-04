@@ -1,7 +1,7 @@
-const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, Event, IntegrationApplication } = require('discord.js');
-const fs = require("fs");
-const util = require("util");
-const { createLogger, format, transports } = require('winston');
+const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require(`discord.js`);
+const fs = require(`fs`);
+const util = require(`util`);
+const { createLogger, format, transports } = require(`winston`);
 
 const logger = createLogger({
     level: `info`,
@@ -35,7 +35,7 @@ module.exports = {
 		.setName(`game`)
 		.setDescription(`Let's play a game!`),
 	async execute(interaction) {
-        const data = await readFile("questions.json");
+        const data = await readFile(`GPTquestions.json`);
         const questions = JSON.parse(data);
         const questionId = Math.floor(Math.random() * questions.length);
         const randomQuestion = questions[questionId];
