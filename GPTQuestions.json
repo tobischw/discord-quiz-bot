@@ -1,0 +1,272 @@
+[
+    {
+      "question": "What is the default subnet mask for a Class C IP address?",
+      "options": ["255.255.255.0", "255.0.0.0", "255.255.0.0"],
+      "answer": 0,
+      "explanation": "C'est la vie!"
+    },
+    {
+      "question": "What is the range of valid IP addresses for a Class C network?",
+      "options": ["192.0.0.0 to 223.255.255.255", "128.0.0.0 to 191.255.255.255", "224.0.0.0 to 239.255.255.255"],
+      "answer": 1,
+      "explanation": "Because it helps megan study"
+    },
+    {
+      "question": "What is the broadcast address for a host with IP address 192.168.1.25 and subnet mask 255.255.255.0?",
+      "options": ["192.168.1.255", "192.168.0.255", "192.168.1.0"],
+      "answer": 0,
+      "explanation": "Because it is what it is"
+    },
+    {
+      "question": "What is the purpose of the default gateway in a TCP/IP network?",
+      "options": ["To provide access to the Internet", "To connect to a VPN", "To route traffic between subnets"],
+      "answer": 0,
+      "explanation": "C'est la vie!"
+    },
+    {
+      "question": "What is the purpose of the ping command in a TCP/IP network?",
+      "options": ["To determine the path taken by packets", "To verify the IP address of a host", "To test connectivity between two devices"],
+      "answer": 2,
+      "explanation": "Because it helps megan study"
+    },
+    {
+      "question": "What is the purpose of Address Resolution Protocol (ARP)?",
+      "options": ["To map an IP address to a physical address", "To map a physical address to an IP address", "To map a domain name to an IP address"],
+      "answer": 0,
+      "explanation": "Because it is what it is"
+    },
+    {
+      "question": "What is the purpose of Internet Control Message Protocol (ICMP)?",
+      "options": ["To provide error reporting for IP", "To provide flow control for TCP", "To provide reliable delivery for UDP"],
+      "answer": 0,
+      "explanation": "C'est la vie!"
+    },
+    {
+      "question": "What is the purpose of the Network Address Translation (NAT)?",
+      "options": ["To translate private addresses to public addresses", "To translate public addresses to private addresses", "To translate IP addresses to domain names"],
+      "answer": 0,
+      "explanation": "Because it is what it is"
+    },
+    {
+      "question": "What is the purpose of the Border Gateway Protocol (BGP)?",
+      "options": ["To provide routing information between networks", "To provide access control between networks", "To provide encryption between networks"],
+      "answer": 0,
+      "explanation": "Because it is what it is"
+    },
+    {
+      "question": "What is the purpose of Simple Network Management Protocol (SNMP)?",
+      "options": ["To manage network devices", "To provide secure communications between devices", "To provide error reporting for IP"],
+      "answer": 0,
+      "explanation": "C'est la vie!"
+    },
+    {
+      "question": "What is the largest animal in the world?",
+      "options": ["Elephant", "Blue Whale", "Giraffe", "Kangaroo"],
+      "answer": 1,
+      "explanation": "The Blue Whale is the largest animal in the world, reaching lengths of up to 100 feet and weights of over 200 tons."
+    },
+    {
+      "question": "What is the fastest land animal?",
+      "options": ["Lion", "Cheetah", "Gazelle", "Hare"],
+      "answer": 1,
+      "explanation": "The Cheetah is the fastest land animal, capable of reaching speeds of up to 60 miles per hour."
+    },
+    {
+      "question": "What is the tallest mammal?",
+      "options": ["Giraffe", "Elephant", "Hippopotamus", "Gorilla"],
+      "answer": 0,
+      "explanation": "The Giraffe is the tallest mammal, with some individuals reaching heights of up to 18 feet."
+    },
+    {
+      "question": "What is the smallest mammal?",
+      "options": ["Pygmy Marmoset", "Kangaroo", "Elephant", "Gorilla"],
+      "answer": 0,
+      "explanation": "The Pygmy Marmoset is the smallest mammal, with adults reaching lengths of only 5 to 6 inches."
+    },
+    {
+      "question": "What is the fastest bird?",
+      "options": ["Peregrine Falcon", "Eagle", "Ostrich", "Penguin"],
+      "answer": 0,
+      "explanation": "The Peregrine Falcon is the fastest bird, capable of diving at speeds of over 200 miles per hour."
+    },
+    {
+      "question": "What is the largest bird in the world?",
+      "options": ["Ostrich", "Pelican", "Eagle", "Penguin"],
+      "answer": 0,
+      "explanation": "The Ostrich is the largest bird in the world, reaching heights of up to 9 feet and weights of over 300 pounds."
+    },
+    {
+      "question": "What is the largest reptile in the world?",
+      "options": ["Komodo Dragon", "Crocodile", "Anaconda", "Iguana"],
+      "answer": 1,
+      "explanation": "The Saltwater Crocodile is the largest reptile in the world, with some individuals reaching lengths of up to 23 feet and weights of over 1,000 pounds."
+    },
+    {
+      "question": "What is the fastest fish in the ocean?",
+      "options": ["Sailfish", "Shark", "Tuna", "Marlin"],
+      "answer": 0,
+      "explanation": "The Sailfish is the fastest fish in the ocean, capable of swimming at speeds of up to 68 miles per hour."
+    },
+    {
+      "question": "What is the oldest zoo in the world?",
+      "options": ["Vienna Zoo", "Berlin Zoo", "Schönbrunn Zoo", "London Zoo"],
+      "answer": 2,
+      "explanation": "Schönbrunn Zoo in Vienna, Austria is the oldest zoo in the world, established in 1752."
+    },
+    {
+      "question": "What is the largest zoo in the world?",
+      "options": ["San Diego Zoo", "Toronto Zoo", "Moscow Zoo", "Beijing Zoo"],
+      "answer": 0,
+      "explanation": "The San Diego Zoo in California, USA is the largest zoo in the world, covering over 100 acres and housing over 3,700 animals."
+    },
+    {
+      "question": "Which zoo is known for its giant pandas?",
+      "options": ["Beijing Zoo", "Toronto Zoo", "San Diego Zoo", "Berlin Zoo"],
+      "answer": 0,
+      "explanation": "The Beijing Zoo in China is known for its giant pandas, which are considered a national symbol in China."
+    },
+    {
+      "question": "Which zoo is famous for its white tigers?",
+      "options": ["Toronto Zoo", "San Diego Zoo", "Nandankanan Zoological Park", "Moscow Zoo"],
+      "answer": 2,
+      "explanation": "Nandankanan Zoological Park in Odisha, India is famous for its white tigers."
+    },
+    {
+      "question": "Where is the zoo that has the largest collection of reptiles in the world?",
+      "options": ["London Zoo", "Vienna Zoo", "San Diego Zoo", "Crocodile Park"],
+      "answer": 3,
+      "explanation": "Crocodile Park in Cairns, Australia has the largest collection of reptiles in the world."
+    },
+    {
+      "question": "Which zoo has the largest collection of primates in the world?",
+      "options": ["San Diego Zoo", "Johor Bahru Zoo", "Toronto Zoo", "Apenheul Primate Park"],
+      "answer": 3,
+      "explanation": "Apenheul Primate Park in Apeldoorn, Netherlands has the largest collection of primates in the world."
+    },
+    {
+      "question": "Where is the world's first open-air cage-less zoo located?",
+      "options": ["Zoo de Vincennes", "Apenheul Primate Park", "Tierpark Berlin", "Zoo Atlanta"],
+      "answer": 1,
+      "explanation": "The world's first open-air cage-less zoo is Apenheul Primate Park in Apeldoorn, Netherlands."
+    },
+    {
+      "question": "Which zoo is famous for its African savanna exhibit?",
+      "options": ["San Diego Zoo", "Toronto Zoo", "Berlin Zoo", "Serengeti Park"],
+      "answer": 3,
+      "explanation": "Serengeti Park in Hodenhagen, Germany is famous for its African savanna exhibit."
+    },
+    {
+      "question": "What is a group of cats called?",
+      "options": ["Flock", "Herd", "Clowder", "Pack"],
+      "answer": 2,
+      "explanation": "A group of cats is called a clowder."
+    },
+    {
+      "question": "What is the average lifespan of a domestic cat?",
+      "options": ["10 years", "12 years", "15 years", "20 years"],
+      "answer": 1,
+      "explanation": "The average lifespan of a domestic cat is 12 to 15 years."
+    },
+    {
+      "question": "What is the world's largest breed of cat?",
+      "options": ["Maine Coon", "Ragdoll", "Siberian", "Persian"],
+      "answer": 0,
+      "explanation": "The Maine Coon is the world's largest breed of cat."
+    },
+    {
+      "question": "What is the average number of kittens in a cat's litter?",
+      "options": ["2-3", "4-5", "6-7", "8-9"],
+      "answer": 1,
+      "explanation": "The average number of kittens in a cat's litter is 4 to 5."
+    },
+    {
+      "question": "What is the term used to describe a cat's fear of water?",
+      "options": ["Aquaphobia", "Hydrophobia", "Aquaticophobia", "Aquaticaphobia"],
+      "answer": 1,
+      "explanation": "The term used to describe a cat's fear of water is hydrophobia."
+    },
+    {
+      "question": "What is the most common eye color of cats?",
+      "options": ["Green", "Blue", "Yellow", "Brown"],
+      "answer": 1,
+      "explanation": "The most common eye color of cats is blue."
+    },
+    {
+      "question": "What is the term used to describe a cat's ability to always land on its feet?",
+      "options": ["Righting reflex", "Uprighting reflex", "Landing reflex", "Falling reflex"],
+      "answer": 0,
+      "explanation": "The term used to describe a cat's ability to always land on its feet is called the righting reflex."
+    },
+    {
+      "question": "What is the average weight of a fully grown domestic cat?",
+      "options": ["5-10 pounds", "10-15 pounds", "15-20 pounds", "20-25 pounds"],
+      "answer": 0,
+      "explanation": "The average weight of a fully grown domestic cat is 5 to 10 pounds."
+    },
+    {
+      "question": "What is the name for a female cat?",
+      "options": ["Tom", "Queen", "Sire", "Dam"],
+      "answer": 1,
+      "explanation": "The name for a female cat is a queen."
+    },
+    {
+      "question": "What is the name for a neutered male cat?",
+      "options": ["Tom", "Queen", "Gib", "Stray"],
+      "answer": 2,
+      "explanation": "The name for a neutered male cat"
+    },
+    {
+      "question": "What is the largest species of bird in the world?",
+      "options": ["Ostrich", "Emu", "Andean Condor", "California Condor"],
+      "answer": 0,
+      "explanation": "The largest species of bird in the world is the Ostrich."
+    },
+    {
+      "question": "What is the smallest species of bird in the world?",
+      "options": ["Bumblebee Hummingbird", "Bee Hummingbird", "Ruby-throated Hummingbird", "Buff-bellied Hummingbird"],
+      "answer": 0,
+      "explanation": "The smallest species of bird in the world is the Bumblebee Hummingbird."
+    },
+    {
+      "question": "What is the name for a group of crows?",
+      "options": ["Herd", "Flock", "Murder", "Gaggle"],
+      "answer": 2,
+      "explanation": "The name for a group of crows is a murder."
+    },
+    {
+      "question": "What is the name for a group of parrots?",
+      "options": ["Herd", "Flock", "Murder", "Puzzle"],
+      "answer": 3,
+      "explanation": "The name for a group of parrots is a puzzle."
+    },
+    {
+      "question": "What is the name for a group of owls?",
+      "options": ["Herd", "Flock", "Parliament", "Gaggle"],
+      "answer": 2,
+      "explanation": "The name for a group of owls is a parliament."
+    },
+    {
+      "question": "What is the term used to describe a bird's ability to fly long distances without rest?",
+      "options": ["Migration", "Flying", "Soaring", "Gliding"],
+      "answer": 0,
+      "explanation": "The term used to describe a bird's ability to fly long distances without rest is migration."
+    },
+    {
+      "question": "What is the name for a young bird?",
+      "options": ["Nestling", "Chick", "Fledgling", "Brood"],
+      "answer": 1,
+      "explanation": "The name for a young bird is a chick."
+    },
+    {
+      "question": "What is the term used to describe a bird's nest?",
+      "options": ["Roost", "Perch", "Home", "Rookery"],
+      "answer": 0,
+      "explanation": "The term used to describe a bird's nest is a roost."
+    },
+    {
+      "question": "What is the name for a bird's eggs?",
+      "options": ["Nest", "Clutch", "Brood", "Bunch"],
+      "answer": 1,
+      "explanation": "The name for a bird's eggs is a clutch."
+    }
+]  

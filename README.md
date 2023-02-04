@@ -4,7 +4,7 @@
 
 ## Dockerfile Commands
 1. docker build --tag discord-quiz-bot .
-2. docker run -itd --network=host --restart=always discord-quiz-bot      
+2. docker run -itd --network=host --restart=always discord-quiz-bot:latest      
 
 ## How to Install/Run
 
