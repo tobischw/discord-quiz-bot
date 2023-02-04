@@ -23,7 +23,7 @@ const readFile = util.promisify(fs.readFile);
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName(`quiz`)
-		.setDescription(`A random quiz question. ***WARNING***  GHOST MODE Enabled!`),
+		.setDescription(`A random quiz question.`),
 	async execute(interaction) {
         const data = await readFile(`questions.json`);
         const questions = JSON.parse(data);
